@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "js-promise-allsettled",
+      "topic": "Promise.allSettled for resilient parallel requests",
+      "tags": [
+        "javascript",
+        "async",
+        "promises"
+      ],
+      "difficulty": "beginner",
+      "language": "JavaScript",
+      "angle": "Show how to run multiple API calls and handle partial failures without try/catch spaghetti.",
+      "done": true
+    },
+    {
+      "id": "ts-discriminated-unions",
+      "topic": "Discriminated unions for safer state machines",
+      "tags": [
+        "typescript",
+        "patterns",
+        "type-safety"
+      ],
+      "difficulty": "intermediate",
+      "language": "TypeScript",
+      "angle": "Model loading/success/error UI states with a single union type and exhaustive switch.",
+      "done": true
+    },
+    {
+      "id": "react-use-transition",
+      "topic": "useTransition for non-blocking UI updates",
+      "tags": [
+        "react",
+        "performance",
+        "hooks"
+      ],
+      "difficulty": "intermediate",
+      "language": "React",
+      "angle": "Demonstrate filtering a large list without freezing input responsiveness.",
+      "done": true
+    },
+    {
+      "id": "node-stream-pipeline",
+      "topic": "stream/promises.pipeline for safe file transforms",
+      "tags": [
+        "nodejs",
+        "streams",
+        "io"
+      ],
+      "difficulty": "intermediate",
+      "language": "Node.js",
+      "angle": "Show gzip compression with automatic cleanup on failure.",
+      "done": false
+    },
+    {
+      "id": "css-container-queries",
+      "topic": "CSS container queries for component-level responsiveness",
+      "tags": [
+        "css",
+        "responsive",
+        "frontend"
+      ],
+      "difficulty": "beginner",
+      "language": "CSS",
+      "angle": "Compare media queries vs container queries for card layouts.",
+      "done": false
+    },
+    {
+      "id": "git-rebase-interactive",
+      "topic": "Interactive rebase to clean commit history before PR",
+      "tags": [
+        "git",
+        "workflow",
+        "devtools"
+      ],
+      "difficulty": "intermediate",
+      "language": "Git",
+      "angle": "Walk through squashing WIP commits and rewriting messages safely.",
+      "done": false
+    },
+    {
+      "id": "sql-window-functions",
+      "topic": "SQL window functions for ranking and running totals",
+      "tags": [
+        "sql",
+        "postgres",
+        "analytics"
+      ],
+      "difficulty": "advanced",
+      "language": "SQL",
+      "angle": "Use ROW_NUMBER and SUM OVER to compute monthly growth without self-joins.",
+      "done": false
+    },
+    {
+      "id": "docker-multistage",
+      "topic": "Multi-stage Docker builds for smaller Node images",
+      "tags": [
+        "docker",
+        "devops",
+        "nodejs"
+      ],
+      "difficulty": "intermediate",
+      "language": "Docker",
+      "angle": "Separate build and runtime stages to cut image size dramatically.",
+      "done": false
+    },
+    {
+      "id": "nextjs-server-actions",
+      "topic": "Server Actions for simple form mutations",
+      "tags": [
+        "nextjs",
+        "react",
+        "server-actions"
+      ],
+      "difficulty": "intermediate",
+      "language": "Next.js",
+      "angle": "Create a contact form without a separate API route.",
+      "done": false
+    },
+    {
+      "id": "redis-cache-aside",
+      "topic": "Cache-aside pattern with Redis",
+      "tags": [
+        "redis",
+        "caching",
+        "backend"
+      ],
+      "difficulty": "advanced",
+      "language": "Redis",
+      "angle": "Explain read-through caching, TTL strategy, and invalidation pitfalls.",
+      "done": false
+    },
+    {
+      "id": "python-dataclasses-slots",
+      "topic": "Python dataclasses with slots for memory efficiency",
+      "tags": [
+        "python",
+        "performance",
+        "dataclasses"
+      ],
+      "difficulty": "intermediate",
+      "language": "Python",
+      "angle": "Show when __slots__ helps and when it hurts flexibility.",
+      "done": false
+    },
+    {
+      "id": "go-context-cancellation",
+      "topic": "context.Context for cancellation in Go services",
+      "tags": [
+        "golang",
+        "concurrency",
+        "backend"
+      ],
+      "difficulty": "intermediate",
+      "language": "Go",
+      "angle": "Propagate deadlines through HTTP handlers and DB calls.",
+      "done": false
+    },
+    {
+      "id": "regex-named-groups",
+      "topic": "Named capture groups for readable regex",
+      "tags": [
+        "javascript",
+        "regex",
+        "parsing"
+      ],
+      "difficulty": "beginner",
+      "language": "JavaScript",
+      "angle": "Parse URLs or log lines with self-documenting group names.",
+      "done": false
+    },
+    {
+      "id": "tailwind-dark-mode",
+      "topic": "Tailwind dark mode strategies",
+      "tags": [
+        "tailwind",
+        "css",
+        "theming"
+      ],
+      "difficulty": "beginner",
+      "language": "Tailwind CSS",
+      "angle": "Compare class-based vs media-query dark mode and when to use each.",
+      "done": false
+    },
+    {
+      "id": "jwt-refresh-rotation",
+      "topic": "Refresh token rotation for safer auth sessions",
+      "tags": [
+        "security",
+        "auth",
+        "backend"
+      ],
+      "difficulty": "advanced",
+      "language": "Node.js",
+      "angle": "Explain rotation, reuse detection, and logout invalidation.",
+      "done": false
+    },
+    {
+      "id": "vitest-mocking-fetch",
+      "topic": "Mocking fetch in Vitest tests",
+      "tags": [
+        "testing",
+        "vitest",
+        "frontend"
+      ],
+      "difficulty": "beginner",
+      "language": "Vitest",
+      "angle": "Test async UI flows without hitting real APIs.",
+      "done": false
+    },
+    {
+      "id": "bash-xtrace-debug",
+      "topic": "Debugging shell scripts with set -x",
+      "tags": [
+        "bash",
+        "shell",
+        "devtools"
+      ],
+      "difficulty": "beginner",
+      "language": "Bash",
+      "angle": "Show safe debugging patterns for CI scripts.",
+      "done": false
+    },
+    {
+      "id": "graphql-dataloader",
+      "topic": "DataLoader to fix N+1 queries in GraphQL",
+      "tags": [
+        "graphql",
+        "performance",
+        "backend"
+      ],
+      "difficulty": "advanced",
+      "language": "GraphQL",
+      "angle": "Batch per-request lookups and cache within a single request lifecycle.",
+      "done": false
+    },
+    {
+      "id": "k8s-liveness-readiness",
+      "topic": "Kubernetes liveness vs readiness probes",
+      "tags": [
+        "kubernetes",
+        "devops",
+        "reliability"
+      ],
+      "difficulty": "intermediate",
+      "language": "Kubernetes",
+      "angle": "Explain when to restart a pod vs remove it from load balancing.",
+      "done": false
+    },
+    {
+      "id": "zod-runtime-validation",
+      "topic": "Runtime validation with Zod at API boundaries",
+      "tags": [
+        "typescript",
+        "zod",
+        "validation"
+      ],
+      "difficulty": "intermediate",
+      "language": "TypeScript",
+      "angle": "Validate unknown JSON once and infer types for the rest of the app.",
+      "done": false
+    }
+  ]
+}

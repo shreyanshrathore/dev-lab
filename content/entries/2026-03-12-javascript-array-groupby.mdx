@@ -1,0 +1,40 @@
+---
+title: Group Arrays with Object.groupBy in JavaScript
+slug: javascript-array-groupby
+date: 2026-03-12
+tags:
+  - javascript
+  - arrays
+  - es2024
+summary: Use Object.groupBy to transform flat arrays into grouped records without manual reduce boilerplate.
+difficulty: beginner
+language: JavaScript
+---
+
+## Why this matters
+
+Grouping data is one of the most common frontend and backend tasks. Before `Object.groupBy`, teams often reached for verbose `reduce` loops that were easy to get wrong.
+
+## The pattern
+
+`Object.groupBy` takes an iterable and a callback, then returns an object whose keys are the grouped values.
+
+```javascript
+const tasks = [
+  { title: "Write tests", status: "done" },
+  { title: "Ship feature", status: "in-progress" },
+  { title: "Fix lint", status: "done" },
+];
+
+const grouped = Object.groupBy(tasks, (task) => task.status);
+
+console.log(grouped.done.length); // 2
+```
+
+## Practical tip
+
+Use `Object.groupBy` when you need stable string/number/symbol keys. If you need a `Map`, use `Map.groupBy` instead.
+
+## Gotcha
+
+The callback must return a value that can be used as an object key. For complex objects, derive a primitive key first.

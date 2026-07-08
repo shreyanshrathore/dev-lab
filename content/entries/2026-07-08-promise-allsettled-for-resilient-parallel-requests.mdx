@@ -1,0 +1,45 @@
+---
+title: "Promise.allSettled for Resilient Parallel Requests"
+slug: "promise-allsettled-for-resilient-parallel-requests"
+date: 2026-07-08
+tags:
+  - javascript
+  - async
+  - promises
+summary: "Use Promise.allSettled to handle partial failures in parallel API calls without resorting to try/catch spaghetti."
+difficulty: beginner
+language: "JavaScript"
+---
+
+## Why this matters
+
+When making multiple API calls concurrently, you may encounter partial failures. Try/catch blocks can lead to unwieldy code and performance issues.
+
+## The pattern
+
+Use Promise.allSettled to wait for all promises to settle (either resolve or reject) without blocking the main thread.
+
+## Practical tip
+
+For each settled promise in the array, access its `status` property to determine if it resolved (`fulfilled`) or rejected.
+
+## Gotcha
+
+Only `Promise.allSettled()` returns an array of objects with `status`, `statusText`, and `value` properties. Other promise methods return either a resolved value or reject the promise.
+
+```javascript
+const apiCalls = [
+  fetch('https://api1.com/data'),
+  fetch('https://api2.com/data'),
+  fetch('https://api3.com/data')
+];
+Promise.allSettled(apiCalls).then(results => {
+  results.forEach(result => {
+    if (result.status === 'fulfilled') {
+      console.log(`API call to ${result.value.url} succeeded with status code ${result.value.statusText}`);
+    } else if (result.status === 'rejected') {
+      console.error(`API call to ${result.value.url} failed with error: ${result.reason}`);
+    }
+  });
+})
+```

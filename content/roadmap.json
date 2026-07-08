@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "feat-tag-filter-pages",
+      "title": "Add dedicated tag pages",
+      "description": "Create /dev/tags/[tag] pages that list all entries for a tag with SEO-friendly metadata.",
+      "type": "feat",
+      "priority": 1,
+      "done": false
+    },
+    {
+      "id": "feat-rss-feed",
+      "title": "Add RSS feed for new entries",
+      "description": "Expose /dev/feed.xml so readers can subscribe to daily Dev Lab updates.",
+      "type": "feat",
+      "priority": 2,
+      "done": false
+    },
+    {
+      "id": "feat-copy-button",
+      "title": "Add copy-to-clipboard for code blocks",
+      "description": "Improve DX by letting readers copy snippets from entry pages in one click.",
+      "type": "feat",
+      "priority": 3,
+      "done": false
+    },
+    {
+      "id": "refactor-entry-layout",
+      "title": "Refactor entry page layout components",
+      "description": "Extract shared header/meta components to reduce duplication between index and detail pages.",
+      "type": "refactor",
+      "priority": 4,
+      "done": false
+    },
+    {
+      "id": "docs-pipeline-readme",
+      "title": "Document pipeline architecture in README",
+      "description": "Add a section explaining backlog rotation, validation, and commit strategy.",
+      "type": "docs",
+      "priority": 5,
+      "done": false
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+---
+title: "Using Discriminated Unions for Safer State Machines"
+slug: "using-discriminated-unions-for-safer-state-machines"
+date: 2026-07-08
+tags:
+  - typescript
+  - patterns
+  - type-safety
+summary: "Discriminated unions provide a safe way to model loading, success, and error states for UI components using a single union type and exhaustive switch."
+difficulty: intermediate
+language: "typescript"
+---
+
+|---| --- |---|
+| Why this matters | Using discriminated unions to model state machines improves code safety and reduces errors. |
+| The pattern | Use a union type with string variant names that match your UI states. |
+| Practical tip | When using exhaustive switch, consider adding a default case for unknown variants. |
+| Gotcha | Be careful when assigning values to union types, as you need to specify the complete type.
+
+```typescript
+enum UiState { Loading, Success, Error };
+function updateUi(ui: UiState): void {
+  switch (ui) {
+    case UiState.Loading:
+      console.log('Loading...');
+      break;
+    case UiState.Success:
+      console.log('Success!');
+      break;
+    case UiState.Error:
+      console.log('Error occurred.');
+      break;
+    default:
+      throw new Error(`Unknown UI state: ${ui}`);
+  }
+}
+updateUi(UiState.Loading); // Output: Loading...
+updateUi(UiState.Success); // Output: Success!
+updateUi(UiState.Error); // Output: Error occurred.
+```

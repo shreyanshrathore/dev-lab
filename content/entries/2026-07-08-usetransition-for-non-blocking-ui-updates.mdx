@@ -1,0 +1,52 @@
+---
+title: "UseTransition for non-blocking UI updates"
+slug: "usetransition-for-non-blocking-ui-updates"
+date: 2026-07-08
+tags:
+  - react
+  - performance
+  - hooks
+summary: "Learn how to update your React application's UI without blocking user input."
+difficulty: intermediate
+language: "React"
+---
+
+# Why this matters
+Large datasets and complex computations can cause UI freezes. UseTransition helps mitigate these issues.
+
+# The pattern
+UseTransition allows you to update your application's state without blocking user input.
+
+# Practical tip
+To filter a large list without freezing the UI, use the `useTransition` hook along with the `useState` and `useCallback` hooks.
+
+# Gotcha
+Be aware of the potential for increased memory usage when using `useTransition`. Optimize your code to minimize this impact.
+
+```javascript
+import { useState, useCallback, useTransition } from 'react';
+
+function FilteredList({ data }) {
+  const [filteredData, setFilteredData] = useState(data);
+  const transition = useTransition(() => setFilteredData(filter => filter.map(item => item.name.includes(query) ? item : null)), [
+    ['input', query],
+    ['key', filteredData]
+  ]);
+
+  return (
+    <div>
+      <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+      <ul>
+        {transition.status === "pending" ? [] : transition.values.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <FilteredList data={[1, 2, 3], 4, 5, 6, 7, 8, 9]} />
+  )}
+```

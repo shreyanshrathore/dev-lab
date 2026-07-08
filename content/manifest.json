@@ -1,0 +1,61 @@
+{
+  "updatedAt": "2026-07-08T20:19:53.153Z",
+  "entries": [
+    {
+      "title": "UseTransition for non-blocking UI updates",
+      "slug": "usetransition-for-non-blocking-ui-updates",
+      "date": "2026-07-08",
+      "tags": [
+        "react",
+        "performance",
+        "hooks"
+      ],
+      "summary": "Learn how to update your React application's UI without blocking user input.",
+      "difficulty": "intermediate",
+      "language": "React",
+      "file": "2026-07-08-usetransition-for-non-blocking-ui-updates.mdx"
+    },
+    {
+      "title": "Using Discriminated Unions for Safer State Machines",
+      "slug": "using-discriminated-unions-for-safer-state-machines",
+      "date": "2026-07-08",
+      "tags": [
+        "typescript",
+        "patterns",
+        "type-safety"
+      ],
+      "summary": "Discriminated unions provide a safe way to model loading, success, and error states for UI components using a single union type and exhaustive switch.",
+      "difficulty": "intermediate",
+      "language": "typescript",
+      "file": "2026-07-08-using-discriminated-unions-for-safer-state-machines.mdx"
+    },
+    {
+      "title": "Promise.allSettled for Resilient Parallel Requests",
+      "slug": "promise-allsettled-for-resilient-parallel-requests",
+      "date": "2026-07-08",
+      "tags": [
+        "javascript",
+        "async",
+        "promises"
+      ],
+      "summary": "Use Promise.allSettled to handle partial failures in parallel API calls without resorting to try/catch spaghetti.",
+      "difficulty": "beginner",
+      "language": "JavaScript",
+      "file": "2026-07-08-promise-allsettled-for-resilient-parallel-requests.mdx"
+    },
+    {
+      "slug": "javascript-array-groupby",
+      "title": "Group Arrays with Object.groupBy in JavaScript",
+      "date": "2026-03-12",
+      "tags": [
+        "javascript",
+        "arrays",
+        "es2024"
+      ],
+      "summary": "Use Object.groupBy to transform flat arrays into grouped records without manual reduce boilerplate.",
+      "difficulty": "beginner",
+      "language": "JavaScript",
+      "file": "2026-03-12-javascript-array-groupby.mdx"
+    }
+  ]
+}
