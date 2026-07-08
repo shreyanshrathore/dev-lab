@@ -56,12 +56,13 @@ export default async function EntryPage({
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {entry.tags.map((tag) => (
-              <span
+              <Link
                 key={tag}
-                className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400"
+                href={`/dev/tags/${encodeURIComponent(tag)}`}
+                className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800"
               >
                 #{tag}
-              </span>
+              </Link>
             ))}
           </div>
         </div>

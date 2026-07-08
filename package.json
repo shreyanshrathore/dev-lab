@@ -9,9 +9,12 @@
     "lint": "eslint",
     "generate": "node scripts/generate.mjs",
     "validate": "node scripts/validate.mjs",
-    "pipeline": "node scripts/generate.mjs && node scripts/validate.mjs"
+    "pipeline": "LLM_PROVIDER=cursor node scripts/generate.mjs && node scripts/validate.mjs && node scripts/commit.mjs",
+    "pipeline:content": "ALLOW_MDX=1 LLM_PROVIDER=ollama node scripts/generate.mjs && node scripts/validate.mjs",
+    "pipeline:cursor": "LLM_PROVIDER=cursor node scripts/generate.mjs && node scripts/validate.mjs && node scripts/commit.mjs"
   },
   "dependencies": {
+    "@cursor/sdk": "^1.0.23",
     "@google/generative-ai": "^0.24.1",
     "gray-matter": "^4.0.3",
     "next": "16.2.10",

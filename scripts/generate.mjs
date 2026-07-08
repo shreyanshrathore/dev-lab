@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
+import { runCursorAgent } from "./cursor-agent.mjs";
 import { generateEntry } from "./llm.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -61,34 +62,30 @@ function writeJson(filePath, data) {
 }
 
 function pickWorkItem() {
-  const dayOfYear = Math.floor(
-    (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) /
-      86_400_000,
+  const roadmap = roadmapSchema.parse(
+    readJson(path.join(contentDir, "roadmap.json")),
   );
-  const useRoadmap = dayOfYear % 7 === 0;
+  const nextRoadmap = roadmap.items
+    .filter((item) => !item.done)
+    .sort((a, b) => a.priority - b.priority)[0];
 
-  if (useRoadmap) {
-    const roadmap = roadmapSchema.parse(
-      readJson(path.join(contentDir, "roadmap.json")),
+  if (nextRoadmap) {
+    return { kind: "roadmap", item: nextRoadmap };
+  }
+
+  if (process.env.ALLOW_MDX === "1") {
+    const backlog = backlogSchema.parse(
+      readJson(path.join(contentDir, "backlog.json")),
     );
-    const nextRoadmap = roadmap.items
-      .filter((item) => !item.done)
-      .sort((a, b) => a.priority - b.priority)[0];
-
-    if (nextRoadmap) {
-      return { kind: "roadmap", item: nextRoadmap };
+    const nextBacklog = backlog.items.find((item) => !item.done);
+    if (nextBacklog) {
+      return { kind: "content", item: nextBacklog };
     }
   }
 
-  const backlog = backlogSchema.parse(
-    readJson(path.join(contentDir, "backlog.json")),
+  throw new Error(
+    "No pending roadmap tasks left. Add more items to content/roadmap.json.",
   );
-  const nextBacklog = backlog.items.find((item) => !item.done);
-  if (!nextBacklog) {
-    throw new Error("No pending backlog items left.");
-  }
-
-  return { kind: "content", item: nextBacklog };
 }
 
 function buildMdx(frontmatter, body, codeSnippet) {
@@ -154,8 +151,14 @@ function markDone(workItem) {
   writeJson(roadmapPath, roadmap);
 }
 
-async function main() {
-  const workItem = pickWorkItem();
+function writePipelineOutput(payload) {
+  fs.writeFileSync(
+    path.join(rootDir, ".pipeline-output.json"),
+    JSON.stringify(payload, null, 2),
+  );
+}
+
+async function generateWithLlm(workItem) {
   const { provider, model, entry: generated } = await generateEntry(workItem);
 
   const date = today();
@@ -188,25 +191,61 @@ async function main() {
     workItem.kind === "content" ? "content" : workItem.item.type;
   const commitMessage = `${commitPrefix}: ${generated.title}`;
 
-  fs.writeFileSync(
-    path.join(rootDir, ".pipeline-output.json"),
-    JSON.stringify(
-      {
-        commitMessage,
-        slug,
-        filename,
-        workItemKind: workItem.kind,
-        provider,
-        model,
-      },
-      null,
-      2,
-    ),
-  );
+  return {
+    commitMessage,
+    slug,
+    filename,
+    workItemKind: workItem.kind,
+    provider,
+    model,
+  };
+}
 
-  console.log(`Generated entry: ${filename}`);
-  console.log(`Provider: ${provider} (${model})`);
-  console.log(`Suggested commit: ${commitMessage}`);
+async function generateWithCursor(workItem) {
+  const result = await runCursorAgent(workItem, rootDir);
+  return {
+    commitMessage: result.commitMessage,
+    slug: result.slug,
+    filename: result.filename,
+    workItemKind: result.workItemKind,
+    provider: result.provider,
+    model: result.model,
+    runId: result.runId,
+  };
+}
+
+async function main() {
+  const workItem = pickWorkItem();
+  const provider = (process.env.LLM_PROVIDER || "cursor").toLowerCase();
+
+  let output;
+  if (provider === "cursor") {
+    output = await generateWithCursor(workItem);
+  } else if (provider === "auto" && process.env.CURSOR_API_KEY) {
+    try {
+      output = await generateWithCursor(workItem);
+    } catch (error) {
+      console.warn(`Cursor failed (${error.message}). Falling back to LLM providers...`);
+      output = await generateWithLlm(workItem);
+    }
+  } else {
+    output = await generateWithLlm(workItem);
+  }
+
+  writePipelineOutput(output);
+
+  console.log(`Task: ${workItem.item.title}`);
+  if (output.changedFiles?.length) {
+    console.log("Changed files:");
+    for (const file of output.changedFiles) {
+      console.log(`  - ${file}`);
+    }
+  }
+  console.log(`Provider: ${output.provider} (${output.model})`);
+  if (output.runId) {
+    console.log(`Cursor run id: ${output.runId}`);
+  }
+  console.log(`Commit message: ${output.commitMessage}`);
 }
 
 main().catch((error) => {

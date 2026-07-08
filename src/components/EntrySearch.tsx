@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { EntryCard } from "./EntryCard";
 import type { ManifestEntry } from "@/lib/schema";
@@ -12,21 +13,19 @@ export function EntrySearch({
   tags: string[];
 }) {
   const [query, setQuery] = useState("");
-  const [activeTag, setActiveTag] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return entries.filter((entry) => {
-      const matchesTag = !activeTag || entry.tags.includes(activeTag);
       const matchesQuery =
         !q ||
         entry.title.toLowerCase().includes(q) ||
         entry.summary.toLowerCase().includes(q) ||
         entry.tags.some((tag) => tag.toLowerCase().includes(q)) ||
         entry.language.toLowerCase().includes(q);
-      return matchesTag && matchesQuery;
+      return matchesQuery;
     });
-  }, [entries, query, activeTag]);
+  }, [entries, query]);
 
   return (
     <div className="space-y-6">
@@ -38,31 +37,17 @@ export function EntrySearch({
           placeholder="Search entries, tags, languages..."
           className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none ring-zinc-300 transition focus:ring-2 dark:border-zinc-800 dark:bg-zinc-950"
         />
-        {activeTag && (
-          <button
-            type="button"
-            onClick={() => setActiveTag(null)}
-            className="rounded-xl border border-zinc-200 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
-          >
-            Clear tag
-          </button>
-        )}
       </div>
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag) => (
-          <button
+          <Link
             key={tag}
-            type="button"
-            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-              activeTag === tag
-                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
-            }`}
+            href={`/dev/tags/${encodeURIComponent(tag)}`}
+            className="rounded-full bg-zinc-100 px-3 py-1.5 text-xs font-medium text-zinc-700 transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
             #{tag}
-          </button>
+          </Link>
         ))}
       </div>
 

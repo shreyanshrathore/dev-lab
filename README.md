@@ -40,47 +40,33 @@ Open [http://localhost:3000/dev](http://localhost:3000/dev).
 
 ## Run the pipeline locally
 
-You can use **Gemini** (cloud) or **Ollama** (local, free, no quota issues).
+`npm run pipeline` now:
 
-### Option A — Local Ollama (recommended if Gemini quota is exhausted)
+1. Picks the next **roadmap code task** from `content/roadmap.json`
+2. Runs **Cursor** to make real changes in `src/`
+3. Validates the build (`tsc` + `next build`)
+4. **Commits** the changes to your current git branch
+
+### Setup
 
 ```bash
-# Make sure Ollama is running
-ollama serve
-
-# Optional: pull a better coding model (recommended)
-ollama pull qwen2.5-coder:7b
-
-export LLM_PROVIDER=ollama
-export OLLAMA_MODEL=qwen2.5-coder:7b   # or llama3.2:3b (already installed)
-
+export CURSOR_API_KEY="cursor_..."   # https://cursor.com/dashboard/integrations
 npm run pipeline
 ```
 
-### Option B — Gemini API
-
-1. Get a free Gemini API key from Google AI Studio.
-2. Export it:
+Optional:
 
 ```bash
-export GEMINI_API_KEY="your-key-here"
-export GEMINI_MODEL="gemini-2.0-flash-lite"
-export LLM_PROVIDER=gemini
+export CURSOR_MODEL=composer-2.5
+export PIPELINE_PUSH=1             # also push to origin after commit
 ```
 
-3. Generate and validate:
+### MDX-only mode (old behavior)
+
+To generate blog entries instead of code changes:
 
 ```bash
-npm run pipeline
-```
-
-### Option C — Auto (default)
-
-If `GEMINI_API_KEY` is set, Gemini is tried first. On quota/rate-limit errors, the pipeline automatically falls back to local Ollama if it is running.
-
-```bash
-export GEMINI_API_KEY="your-key-here"
-npm run pipeline
+npm run pipeline:content
 ```
 
 ### Troubleshooting Gemini 429 / quota errors
@@ -154,9 +140,11 @@ Body sections:
 
 ## Troubleshooting
 
-### `GEMINI_API_KEY is required`
+### `CURSOR_API_KEY is required for Cursor provider`
 
-Set the secret in GitHub repo settings, or use local Ollama with `LLM_PROVIDER=ollama`.
+Get a key from https://cursor.com/dashboard/integrations and run with `LLM_PROVIDER=cursor`.
+
+Note: Cursor runs locally against this repo on your Mac. GitHub Actions still uses Gemini (Cursor local agent is not available on CI runners).
 
 ### `429 Too Many Requests` from Gemini
 

@@ -7,7 +7,7 @@
       "description": "Create /dev/tags/[tag] pages that list all entries for a tag with SEO-friendly metadata.",
       "type": "feat",
       "priority": 1,
-      "done": false
+      "done": true
     },
     {
       "id": "feat-rss-feed",

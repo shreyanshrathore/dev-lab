@@ -37,6 +37,22 @@ export function getAllTags(): string[] {
   return Array.from(tags).sort();
 }
 
+export function resolveTag(tagParam: string): string | null {
+  const decoded = decodeURIComponent(tagParam);
+  return (
+    getAllTags().find((tag) => tag.toLowerCase() === decoded.toLowerCase()) ??
+    null
+  );
+}
+
+export function getEntriesByTag(tag: string): ManifestEntry[] {
+  const resolved = resolveTag(tag);
+  if (!resolved) return [];
+  return getAllManifestEntries().filter((entry) =>
+    entry.tags.includes(resolved),
+  );
+}
+
 export function getEntryBySlug(slug: string): Entry | null {
   const manifestEntry = getAllManifestEntries().find((e) => e.slug === slug);
   if (!manifestEntry) return null;
