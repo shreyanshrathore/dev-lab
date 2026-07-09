@@ -15,7 +15,7 @@
       "description": "Expose /dev/feed.xml so readers can subscribe to daily Dev Lab updates.",
       "type": "feat",
       "priority": 2,
-      "done": false
+      "done": true
     },
     {
       "id": "feat-copy-button",

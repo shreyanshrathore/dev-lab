@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-07-08T20:19:53.153Z",
+  "updatedAt": "2026-07-09T06:38:03.491Z",
   "entries": [
+    {
+      "title": "Add RSS feed for new entries",
+      "slug": "add-rss-feed-for-new-entries",
+      "date": "2026-07-09",
+      "tags": [
+        "nextjs",
+        "dev-lab",
+        "feat"
+      ],
+      "summary": "Expose /dev/feed.xml so readers can subscribe to daily Dev Lab updates. This roadmap note documents the intended improvement for the Dev Lab site.",
+      "difficulty": "intermediate",
+      "language": "Next.js",
+      "file": "2026-07-09-add-rss-feed-for-new-entries.mdx"
+    },
     {
       "title": "UseTransition for non-blocking UI updates",
       "slug": "usetransition-for-non-blocking-ui-updates",

@@ -1,0 +1,35 @@
+---
+title: "Add RSS feed for new entries"
+slug: "add-rss-feed-for-new-entries"
+date: 2026-07-09
+tags:
+  - nextjs
+  - dev-lab
+  - feat
+summary: "Expose /dev/feed.xml so readers can subscribe to daily Dev Lab updates. This roadmap note documents the intended improvement for the Dev Lab site."
+difficulty: intermediate
+language: "Next.js"
+---
+
+## Why this matters
+
+Expose /dev/feed.xml so readers can subscribe to daily Dev Lab updates.
+
+## The pattern
+
+Ship this as a small, isolated change with validation before merge.
+
+## Practical tip
+
+Keep the first version narrow and iterate after the build passes.
+
+## Gotcha
+
+Avoid mixing content generation changes with large UI refactors in one commit.
+
+```javascript
+// Example Next.js route handler skeleton
+export async function GET() {
+  return Response.json({ status: 'ok', feature: 'feat-rss-feed' });
+}
+```
