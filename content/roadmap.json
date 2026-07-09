@@ -31,7 +31,7 @@
       "description": "Extract shared header/meta components to reduce duplication between index and detail pages.",
       "type": "refactor",
       "priority": 4,
-      "done": false
+      "done": true
     },
     {
       "id": "docs-pipeline-readme",

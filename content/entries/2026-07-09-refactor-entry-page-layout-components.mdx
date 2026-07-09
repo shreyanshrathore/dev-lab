@@ -1,0 +1,35 @@
+---
+title: "Refactor entry page layout components"
+slug: "refactor-entry-page-layout-components"
+date: 2026-07-09
+tags:
+  - nextjs
+  - dev-lab
+  - refactor
+summary: "Extract shared header/meta components to reduce duplication between index and detail pages. This roadmap note documents the intended improvement for the Dev Lab site."
+difficulty: intermediate
+language: "Next.js"
+---
+
+## Why this matters
+
+Extract shared header/meta components to reduce duplication between index and detail pages.
+
+## The pattern
+
+Ship this as a small, isolated change with validation before merge.
+
+## Practical tip
+
+Keep the first version narrow and iterate after the build passes.
+
+## Gotcha
+
+Avoid mixing content generation changes with large UI refactors in one commit.
+
+```javascript
+// Example Next.js route handler skeleton
+export async function GET() {
+  return Response.json({ status: 'ok', feature: 'refactor-entry-layout' });
+}
+```
