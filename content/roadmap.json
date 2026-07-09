@@ -23,7 +23,7 @@
       "description": "Improve DX by letting readers copy snippets from entry pages in one click.",
       "type": "feat",
       "priority": 3,
-      "done": false
+      "done": true
     },
     {
       "id": "refactor-entry-layout",
