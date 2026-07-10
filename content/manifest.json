@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-07-09T17:16:59.677Z",
+  "updatedAt": "2026-07-10T06:38:46.011Z",
   "entries": [
+    {
+      "title": "Document pipeline architecture in README",
+      "slug": "document-pipeline-architecture-in-readme",
+      "date": "2026-07-10",
+      "tags": [
+        "nextjs",
+        "dev-lab",
+        "docs"
+      ],
+      "summary": "Add a section explaining backlog rotation, validation, and commit strategy. This roadmap note documents the intended improvement for the Dev Lab site.",
+      "difficulty": "intermediate",
+      "language": "Next.js",
+      "file": "2026-07-10-document-pipeline-architecture-in-readme.mdx"
+    },
     {
       "title": "Refactor entry page layout components",
       "slug": "refactor-entry-page-layout-components",

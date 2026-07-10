@@ -39,7 +39,7 @@
       "description": "Add a section explaining backlog rotation, validation, and commit strategy.",
       "type": "docs",
       "priority": 5,
-      "done": false
+      "done": true
     }
   ]
 }
