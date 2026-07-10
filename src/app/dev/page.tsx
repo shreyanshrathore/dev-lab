@@ -6,6 +6,13 @@ export const metadata = {
   title: "Dev Lab | Daily developer knowledge",
   description:
     "A self-growing knowledge base of practical developer tips, patterns, and runnable snippets.",
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/dev/feed.xml", title: "Dev Lab RSS Feed" },
+      ],
+    },
+  },
 };
 
 export default function DevIndexPage() {
@@ -28,12 +35,20 @@ export default function DevIndexPage() {
               honest auto-commit pipeline. Every entry is buildable and useful.
             </p>
           </div>
-          <Link
-            href="/"
-            className="hidden rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900 sm:inline-flex"
-          >
-            Home
-          </Link>
+          <div className="hidden items-center gap-2 sm:flex">
+            <a
+              href="/dev/feed.xml"
+              className="rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            >
+              RSS
+            </a>
+            <Link
+              href="/"
+              className="rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            >
+              Home
+            </Link>
+          </div>
         </div>
       </header>
 
