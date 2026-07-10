@@ -36,6 +36,12 @@ export default function DevIndexPage() {
             </p>
           </div>
           <div className="hidden items-center gap-2 sm:flex">
+            <Link
+              href="/dev/stats"
+              className="rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
+            >
+              Stats
+            </Link>
             <a
               href="/dev/feed.xml"
               className="rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
