@@ -84,3 +84,26 @@ export function getEntryBySlug(slug: string): Entry | null {
 export function getAllSlugs(): string[] {
   return getAllManifestEntries().map((entry) => entry.slug);
 }
+
+export function getRelatedEntries(
+  slug: string,
+  limit = 3,
+): ManifestEntry[] {
+  const current = getAllManifestEntries().find((e) => e.slug === slug);
+  if (!current) return [];
+
+  return getAllManifestEntries()
+    .filter((entry) => entry.slug !== slug)
+    .map((entry) => ({
+      entry,
+      score: entry.tags.filter((tag) => current.tags.includes(tag)).length,
+    }))
+    .filter(({ score }) => score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        new Date(b.entry.date).getTime() - new Date(a.entry.date).getTime(),
+    )
+    .slice(0, limit)
+    .map(({ entry }) => entry);
+}
