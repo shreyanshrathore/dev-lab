@@ -40,6 +40,14 @@
       "type": "docs",
       "priority": 5,
       "done": true
+    },
+    {
+      "id": "feat-table-of-contents",
+      "title": "Add table of contents to entry pages",
+      "description": "Auto-generate a TOC from h2/h3 headings with anchor links for faster navigation.",
+      "type": "feat",
+      "priority": 6,
+      "done": true
     }
   ]
 }
