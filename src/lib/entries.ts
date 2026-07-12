@@ -85,6 +85,20 @@ export function getAllSlugs(): string[] {
   return getAllManifestEntries().map((entry) => entry.slug);
 }
 
+export function getAdjacentEntries(slug: string): {
+  newer: ManifestEntry | null;
+  older: ManifestEntry | null;
+} {
+  const entries = getAllManifestEntries();
+  const index = entries.findIndex((entry) => entry.slug === slug);
+  if (index === -1) return { newer: null, older: null };
+
+  return {
+    newer: index > 0 ? entries[index - 1] : null,
+    older: index < entries.length - 1 ? entries[index + 1] : null,
+  };
+}
+
 export function getRelatedEntries(
   slug: string,
   limit = 3,

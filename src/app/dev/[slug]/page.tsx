@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { EntryNavigation } from "@/components/EntryNavigation";
 import { MarkdownContent } from "@/components/MarkdownContent";
 import { RelatedEntries } from "@/components/RelatedEntries";
-import { getAllSlugs, getEntryBySlug, getRelatedEntries } from "@/lib/entries";
+import {
+  getAdjacentEntries,
+  getAllSlugs,
+  getEntryBySlug,
+  getRelatedEntries,
+} from "@/lib/entries";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -33,6 +39,7 @@ export default async function EntryPage({
   if (!entry) notFound();
 
   const relatedEntries = getRelatedEntries(slug);
+  const { newer, older } = getAdjacentEntries(slug);
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
@@ -73,6 +80,7 @@ export default async function EntryPage({
 
       <main className="mx-auto max-w-3xl px-6 py-10">
         <MarkdownContent content={entry.content} />
+        <EntryNavigation newer={newer} older={older} />
         <RelatedEntries entries={relatedEntries} />
       </main>
     </div>
